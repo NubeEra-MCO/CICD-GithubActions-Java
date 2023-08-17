@@ -1,0 +1,17 @@
+name: displaying message welcome
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: step1 this is welcome
+        run: echo "Welcome to Github Runner"
+        
+      - name: step2 
+        run: echo "Bye from Github Runner"
+
+      - name: step3
+        run: echo "Github is Very powerfull tool"
+
+      - name: step4
+        run: echo "Github is used to store and process"
