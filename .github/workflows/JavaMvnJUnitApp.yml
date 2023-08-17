@@ -27,5 +27,5 @@ jobs:
       
       - name: 6. Deploy and Run Project
         run: |
-          cd target\classes
+          cd target/classes
           java com.mycompany.app.Calculator
