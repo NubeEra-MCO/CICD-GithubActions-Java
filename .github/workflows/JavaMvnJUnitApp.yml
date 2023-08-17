@@ -1,0 +1,23 @@
+name: Perform CICD Operations on Console Based Java Application
+on: push
+jobs:
+  CICD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Config Tools(JAVA, MVN)
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: 2. Check Java and Maven Versions
+        run: |
+          java -version
+          javac -version
+          mvn --version
+
+      - name: 3. Clone Project
+        uses: actions/checkout@v3     
+
+      - name: 4. Check All Files
+        run: ls -ltra
