@@ -19,5 +19,13 @@ jobs:
       - name: 3. Clone Project
         uses: actions/checkout@v3     
 
-      - name: 4. Check All Files
-        run: ls -ltra
+      - name: 4. Clean Project
+        run: mvn clean
+
+      - name: 5. Build & Test Project
+        run: mvn package 
+      
+      - name: 6. Deploy and Run Project
+        run: |
+          cd target\classes
+          java com.mycompany.app.Calculator
