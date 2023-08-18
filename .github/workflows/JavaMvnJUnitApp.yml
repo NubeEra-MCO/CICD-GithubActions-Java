@@ -10,22 +10,37 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 2. Check Java and Maven Versions
+      - name: 2. Config Tools(Terraform)
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.5
+
+      - name: 3. Check Java and Maven Versions
         run: |
           java -version
           javac -version
           mvn --version
+          terraform --version
 
-      - name: 3. Clone Project
+      - name: 4. Clone Project
         uses: actions/checkout@v3     
 
-      - name: 4. Clean Project
+      - name: 5. Clean Project
         run: mvn clean
 
-      - name: 5. Build & Test Project
+      - name: 6. Build & Test Project
         run: mvn package 
       
-      - name: 6. Deploy and Run Project
+      - name: 7. Infrastructure Provisioning(Initialize)
+        run: terraform init
+
+      - name: 8. Infrastructure Provisioning(Plan)
+        run: terraform plan 
+
+      - name: 9. Infrastructure Provisioning(Plan)
+        run: terraform apply -auto-approve -input=false
+
+      - name: 10. Deploy and Run Project
         run: |
           cd target/classes
           java com.mycompany.app.Calculator
