@@ -1,4 +1,4 @@
-name: Perform CICD Operations on Console Based Java Application
+name: Perform CICD Operations on Console Based Java App
 on: push
 jobs:
   CICD:
