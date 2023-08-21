@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "my-tf-test-18augbucket22"
+  bucket = "my-bkt-21-aug"
   acl    = "private"
 
   versioning {
