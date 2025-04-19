@@ -1,5 +1,6 @@
 name: Perform CICD Operations on Console Based Java Application
-on: push
+on: 
+  workflow_dispatch:
 jobs:
   CICD:
     runs-on: ubuntu-latest
@@ -15,32 +16,37 @@ jobs:
         with:
           terraform_version: 1.5.5
 
-      - name: 3. Check Java and Maven Versions
+      - name: 3. Install Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y maven  # Install Maven
+
+      - name: 4. Check Java and Maven Versions
         run: |
           java -version
           javac -version
           mvn --version
           terraform --version
 
-      - name: 4. Clone Project
+      - name: 5. Clone Project
         uses: actions/checkout@v3     
 
-      - name: 5. Clean Project
+      - name: 6. Clean Project
         run: mvn clean
 
-      - name: 6. Build & Test Project
+      - name: 7. Build & Test Project
         run: mvn package 
       
-      - name: 7. Infrastructure Provisioning(Initialize)
+      - name: 8. Infrastructure Provisioning(Initialize)
         run: terraform init
 
-      - name: 8. Infrastructure Provisioning(Plan)
+      - name: 9. Infrastructure Provisioning(Plan)
         run: terraform plan 
 
-      - name: 9. Infrastructure Provisioning(Plan)
+      - name: 10. Infrastructure Provisioning(Plan)
         run: terraform apply -auto-approve -input=false
 
-      - name: 10. Deploy and Run Project
+      - name: 11. Deploy and Run Project
         run: |
           cd target/classes
           java com.mycompany.app.Calculator
